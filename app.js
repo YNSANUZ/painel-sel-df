@@ -40,7 +40,6 @@ function renderPrograms(q = "") {
   $("#programList").innerHTML = list.length
     ? list.map(programCard).join("")
     : '<p class="empty">Nenhum programa encontrado.</p>';
-  observeReveals();
 }
 function renderData() {
   const max = Math.max(...SEL.support.map((x) => x.investment));
@@ -56,7 +55,6 @@ function renderData() {
   ];
   $("#dataContent").innerHTML =
     `<div class="data-hero reveal"><div><span>COMPETE BRASÍLIA</span><h2>Resultados que atravessam fronteiras</h2><p>Apoio demonstrativo a atletas e paratletas em competições.</p></div><div class="donut" style="--target:72"><strong data-count="1773">0</strong><small>beneficiados</small></div></div><div class="data-kpis reveal"><article><small>Investimento</small><strong>R$ <b data-count="2.91" data-decimals="2">0</b> mi</strong><span>Total demonstrativo</span></article><article><small>Medalhas</small><strong data-count="350">0</strong><span>Referência visual</span></article><article><small>Apoios</small><strong data-count="3">0</strong><span>Modalidades de transporte</span></article></div><article class="chart-card reveal"><div class="section-head"><div><small>DISTRIBUIÇÃO</small><h2>Investimento por apoio</h2></div></div><div class="bars">${SEL.support.map((x) => `<div><div class="bar-head"><span>${x.name}</span><strong>${money(x.investment)}</strong></div><div class="track"><i style="--w:${(x.investment / max) * 100}%;background:${x.color}"></i></div><small><b data-count="${x.people}">0</b> atendimentos</small></div>`).join("")}</div><p class="source-note">Valores demonstrativos, sem integração em tempo real.</p></article><div class="chart-pair"><article class="chart-card reveal"><div class="section-head"><div><small>DESEMPENHO</small><h2>Medalhas obtidas</h2></div></div><div class="vertical-chart">${medals.map(([name, value, color]) => `<div><strong data-count="${value}">0</strong><i style="--h:${value / 2}%;background:${color}"></i><span>${name}</span></div>`).join("")}</div></article><article class="chart-card reveal"><div class="section-head"><div><small>ATENDIMENTOS</small><h2>Perfil do apoio</h2></div></div><div class="bars compact">${profiles.map(([name, value, color]) => `<div><div class="bar-head"><span>${name}</span><strong data-count="${value}">0</strong></div><div class="track"><i style="--w:${value / 1.5}%;background:${color}"></i></div></div>`).join("")}</div></article></div><div class="split-cards reveal"><article><span data-count="12">0</span><h3>COPs</h3><p>Unidades em diferentes regiões do DF.</p></article><article><span><b data-count="2000">0</b>+</span><h3>Escola de Esportes</h3><p>Alunos no cenário demonstrativo.</p></article></div>`;
-  observeReveals();
 }
 function renderModalities() {
   $("#modalityList").innerHTML = SEL.general
@@ -95,7 +93,6 @@ function renderSchool() {
           `<div class="compete-row"><strong>${name}</strong><span data-count="${para}">0</span><span data-count="${athlete}">0</span><span data-count="${staff}">0</span><b data-count="${total}">0</b><em>R$ ${investment}</em></div>`,
       )
       .join("");
-  observeReveals();
 }
 let spaceType = "cops";
 function renderSpaces() {
@@ -130,7 +127,6 @@ function renderTeam() {
         `<article class="team-card reveal"><span>${String(i + 1).padStart(2, "0")}</span><div><h3>${x.name}</h3><p>${x.role}</p></div></article>`,
     )
     .join("");
-  observeReveals();
 }
 function animateCounts(root = document) {
   const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -159,12 +155,16 @@ function animateCounts(root = document) {
   });
 }
 let revealObserver;
-function observeReveals() {
+function observeReveals(root = document) {
+  const reveals = $$(".reveal:not(.shown)", root);
   if (
     !("IntersectionObserver" in window) ||
     matchMedia("(prefers-reduced-motion: reduce)").matches
   ) {
-    $$(".reveal").forEach((x) => x.classList.add("shown"));
+    reveals.forEach((x) => {
+      x.classList.add("shown");
+      animateCounts(x);
+    });
     return;
   }
   if (!revealObserver)
@@ -179,7 +179,8 @@ function observeReveals() {
         }),
       { threshold: 0.12 },
     );
-  $$(".reveal:not(.shown)").forEach((x) => {
+  revealObserver.disconnect();
+  reveals.forEach((x) => {
     revealObserver.unobserve(x);
     revealObserver.observe(x);
   });
@@ -208,12 +209,7 @@ function route() {
   });
   setTimeout(() => {
     const activeView = $(`[data-view="${safe}"]`);
-    $$(".reveal", activeView).forEach((item) => {
-      if (item.getBoundingClientRect().top < innerHeight * 1.15)
-        item.classList.add("shown");
-    });
-    observeReveals();
-    $$(".reveal.shown", activeView).forEach((item) => animateCounts(item));
+    observeReveals(activeView);
   }, 60);
 }
 renderFeatured();
@@ -224,7 +220,6 @@ renderSchool();
 setupSpaces();
 renderTeam();
 route();
-observeReveals();
 addEventListener("hashchange", route);
 document.addEventListener("click", (e) => {
   const p = e.target.closest("[data-program]");
