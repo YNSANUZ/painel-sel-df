@@ -332,10 +332,12 @@ main {
   gap: 15px;
 }
 .program-card {
-  border: 1px solid var(--line);
+  --card: var(--blue);
+  border: 1px solid transparent;
   border-radius: 22px;
   padding: 20px;
-  background: #fff;
+  background: var(--card);
+  color: #fff;
   min-height: 300px;
   display: flex;
   flex-direction: column;
@@ -349,7 +351,7 @@ main {
   height: 5px;
   position: absolute;
   inset: 0 0 auto;
-  background: var(--card, var(--blue));
+  background: rgba(255, 255, 255, 0.48);
 }
 .program-card:hover {
   transform: translateY(-4px);
@@ -370,6 +372,7 @@ main {
 }
 .tone-yellow {
   --card: var(--yellow);
+  color: var(--navy);
 }
 .tone-coral {
   --card: var(--coral);
@@ -378,7 +381,7 @@ main {
   width: 62px;
   height: 62px;
   border-radius: 18px;
-  background: color-mix(in srgb, var(--card) 13%, white);
+  background: rgba(255, 255, 255, 0.9);
   color: var(--card);
   display: grid;
   place-items: center;
@@ -397,7 +400,8 @@ main {
   stroke-width: 1.8;
 }
 .program-card > span {
-  color: var(--card);
+  color: inherit;
+  opacity: 0.86;
   font-size: 11px;
   font-weight: 850;
   text-transform: uppercase;
@@ -409,7 +413,8 @@ main {
   margin: 8px 0;
 }
 .program-card p {
-  color: var(--muted);
+  color: inherit;
+  opacity: 0.86;
   font-size: 14px;
   line-height: 1.45;
   margin: 0 0 14px;
@@ -421,8 +426,8 @@ main {
 .program-card button {
   border: 0;
   border-radius: 999px;
-  background: var(--card, var(--blue));
-  color: #fff;
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--card);
   font-weight: 800;
   padding: 11px 14px;
   margin-top: 14px;
@@ -430,6 +435,9 @@ main {
   align-items: center;
   justify-content: space-between;
   pointer-events: none;
+}
+.tone-yellow button {
+  color: var(--navy);
 }
 .map-teaser {
   background: #062e58;
@@ -1524,6 +1532,40 @@ dialog::backdrop {
   .featured,
   .program-grid {
     grid-template-columns: 1fr;
+  }
+  .program-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 9px;
+  }
+  .program-grid .program-card {
+    min-height: 205px;
+    padding: 14px;
+    border-radius: 18px;
+  }
+  .program-grid .program-icon {
+    display: none;
+  }
+  .program-grid .program-card > span {
+    font-size: 9px;
+    line-height: 1.25;
+  }
+  .program-grid .program-card h3 {
+    font-size: 17px;
+    margin: 7px 0;
+  }
+  .program-grid .program-card p {
+    display: none;
+  }
+  .program-grid .program-card > strong {
+    font-size: 11px;
+  }
+  .program-grid .program-card button {
+    padding: 9px 10px;
+    font-size: 11px;
+  }
+  .program-grid .program-card button svg {
+    width: 17px;
+    height: 17px;
   }
   .featured .program-card:nth-child(3) {
     display: none;
