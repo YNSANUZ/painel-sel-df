@@ -1,26 +1,299 @@
-(function(root){
-  const general=[['Atividade física orientada','bem-estar'],['Atletismo','individuais'],['Basquete','coletivas'],['Boxe','lutas'],['Capoeira','lutas'],['Dança','bem-estar'],['Desenvolvimento motor I e II','bem-estar'],['Futebol de areia','coletivas'],['Futebol society','coletivas'],['Futebol feminino','coletivas'],['Futevôlei','coletivas'],['Futsal','coletivas'],['Ginástica artística','ginasticas'],['Ginástica localizada','ginasticas'],['Ginástica acrobática','ginasticas'],['Ginástica rítmica','ginasticas'],['Hidroginástica','aquaticas'],['Karatê','lutas'],['Natação','aquaticas'],['Pilates','bem-estar'],['Polo aquático','aquaticas'],['Saltos ornamentais','aquaticas'],['Taekwondo','lutas'],['Tênis','individuais'],['Vôlei de quadra','coletivas'],['Vôlei de praia','coletivas']].map(([name,category])=>({name,category}));
-  const inclusive=['Atletismo','Bocha','Estimulação básica','Estimulação essencial','Estimulação global I e II','Goalball','Hidroginástica','Natação','Tênis','Parabadminton','Programa de inclusão','Projeto esportivo'];
-  const school=[['Ginástica acrobática',18],['Nado artístico',12],['Natação',24],['Deep water',16],['Musculação',30],['Saltos ornamentais',10],['Alongamento',22],['Karatê',20]].map(([name,vacancies])=>({name,vacancies}));
-  const support=[{name:'Nacional',people:316,investment:478602.40,color:'#0780df'},{name:'Internacional',people:173,investment:1539450.49,color:'#00a66d'},{name:'Terrestre',people:1284,investment:890139.53,color:'#ffb627'}];
-  const programs=[
-    {id:'escola',name:'Escola de Esportes',tag:'Formação e qualidade de vida',icon:'book',logo:'escola.png',tone:'blue',description:'Atividades para crianças, adolescentes, adultos, idosos e pessoas com deficiência.',highlight:'2 mil+ alunos',action:'Conhecer a escola',url:'https://esporte.df.gov.br/escola-de-esportes/'},
-    {id:'compete',name:'Compete Brasília',tag:'Alto rendimento',icon:'trophy',logo:'compete.png',tone:'green',description:'Apoio a atletas e paratletas em competições nacionais e internacionais.',highlight:'1.773 beneficiados',action:'Ver resultados',url:'https://esporte.df.gov.br/compete/'},
-    {id:'distrito',name:'Distrito Gamer',tag:'Esporte eletrônico',icon:'grid',tone:'purple',description:'Iniciativa demonstrativa para aproximar juventude, tecnologia e competição saudável.',highlight:'Novas experiências',action:'Ver programa',url:'https://esporte.df.gov.br/'},
-    {id:'podio',name:'DF no Pódio',tag:'Talentos do Distrito Federal',icon:'medal',tone:'yellow',description:'Vitrine de apoio e reconhecimento a talentos esportivos do Distrito Federal.',highlight:'Talento em destaque',action:'Ver programa',url:'https://esporte.df.gov.br/'},
-    {id:'gol',name:'Gol de Placa',tag:'Materiais esportivos',icon:'ball',tone:'blue',description:'Apoio a projetos e comunidades por meio da oferta de materiais esportivos.',highlight:'Esporte perto de você',action:'Ver programa',url:'https://esporte.df.gov.br/esporte-para-todos/'},
-    {id:'mulheres',name:'Mulheres no Topo',tag:'Protagonismo feminino',icon:'people',tone:'coral',description:'Incentivo à presença e ao protagonismo de mulheres no esporte do DF.',highlight:'Mais representatividade',action:'Ver programa',url:'https://esporte.df.gov.br/'},
-    {id:'viva',name:'Projeto Viva',tag:'Saúde e convivência',icon:'heart',tone:'green',description:'Práticas esportivas e de lazer para uma rotina mais ativa e integrada.',highlight:'Qualidade de vida',action:'Ver programa',url:'https://esporte.df.gov.br/'},
-    {id:'cops',name:'Centros Olímpicos e Paralímpicos',tag:'Esporte e inclusão',icon:'people',logo:'cops.png',tone:'blue',description:'Rede de unidades para esporte, lazer, formação e inclusão em todas as idades.',highlight:'12 unidades',action:'Explorar espaços',url:'https://esporte.df.gov.br/cops/'},
-    {id:'cidades',name:'Esporte nas Cidades',tag:'Ações itinerantes',icon:'pin',tone:'yellow',description:'Atividades e experiências esportivas levadas às regiões administrativas.',highlight:'Presença no DF',action:'Ver programa',url:'https://esporte.df.gov.br/'},
-    {id:'bolsa',name:'Bolsa Atleta',tag:'Incentivo ao esporte',icon:'medal',tone:'green',description:'Apoio para que atletas sigam treinando, competindo e representando o DF.',highlight:'Apoio ao rendimento',action:'Ver programa',url:'https://esporte.df.gov.br/bolsa-atleta/'},
-    {id:'sesi',name:'Parceria SESI',tag:'Cooperação institucional',icon:'users',tone:'purple',description:'Ações demonstrativas em parceria para ampliar o acesso ao esporte e ao lazer.',highlight:'Rede de oportunidades',action:'Ver programa',url:'https://esporte.df.gov.br/'},
-    {id:'lei',name:'Lei de Incentivo ao Esporte',tag:'Fomento a projetos',icon:'file',logo:'lei.png',tone:'coral',description:'Incentivo fiscal para projetos esportivos e paraesportivos no Distrito Federal.',highlight:'Projetos que transformam',action:'Conhecer a lei',url:'https://esporte.df.gov.br/lei-de-incentivo-ao-esporte/'}
+(function (root) {
+  const general = [
+    ["Atividade física orientada", "bem-estar"],
+    ["Atletismo", "individuais"],
+    ["Basquete", "coletivas"],
+    ["Boxe", "lutas"],
+    ["Capoeira", "lutas"],
+    ["Dança", "bem-estar"],
+    ["Desenvolvimento motor I e II", "bem-estar"],
+    ["Futebol de areia", "coletivas"],
+    ["Futebol society", "coletivas"],
+    ["Futebol feminino", "coletivas"],
+    ["Futevôlei", "coletivas"],
+    ["Futsal", "coletivas"],
+    ["Ginástica artística", "ginasticas"],
+    ["Ginástica localizada", "ginasticas"],
+    ["Ginástica acrobática", "ginasticas"],
+    ["Ginástica rítmica", "ginasticas"],
+    ["Hidroginástica", "aquaticas"],
+    ["Karatê", "lutas"],
+    ["Natação", "aquaticas"],
+    ["Pilates", "bem-estar"],
+    ["Polo aquático", "aquaticas"],
+    ["Saltos ornamentais", "aquaticas"],
+    ["Taekwondo", "lutas"],
+    ["Tênis", "individuais"],
+    ["Vôlei de quadra", "coletivas"],
+    ["Vôlei de praia", "coletivas"],
+  ].map(([name, category]) => ({ name, category }));
+  const inclusive = [
+    "Atletismo",
+    "Bocha",
+    "Estimulação básica",
+    "Estimulação essencial",
+    "Estimulação global I e II",
+    "Goalball",
+    "Hidroginástica",
+    "Natação",
+    "Tênis",
+    "Parabadminton",
+    "Programa de inclusão",
+    "Projeto esportivo",
   ];
-  const centers=['Brazlândia','Recanto das Emas','Ceilândia - Setor O','Santa Maria','Ceilândia - Parque da Vaquejada','Sobradinho','Estrutural','São Sebastião','Gama','Riacho Fundo','Planaltina','Samambaia'];
-  const venues=['Ginásio de Esportes de Samambaia','Parque Aquático Cláudio Coutinho','Parque da Cidade Dona Sarah Kubitschek','Pavilhão de Exposições do Parque da Cidade','Estádio Bezerrão','Estádio Joaquim Domingos Roriz','Estádio Augustinho Lima','Estádio Abadião'];
-  const fields=['Planaltina','Gama - QD 8, Setor Sul','COP Samambaia - QN 319','COP Vaquejada - QNP 21','Ceilândia - EQNN 01/03','Taguatinga - QNJ 03/05','Samambaia - 311','Sobradinho - COP'];
-  const team=[['Victor Renato Junqueira Lacerda','Secretário de Esporte e Lazer'],['Mateus Celestino Bahia','Secretário Executivo'],['Maria Paula Lopes Andrade','Chefe de Gabinete'],['Nivaldo Vieira Felix','Subsecretário de Esporte, Lazer e Espaços Esportivos'],['Edimar Souza Lima','Subsecretário de Administração Geral'],['Carlos Henrique Ferreira Pontes','Subsecretário de Projetos e Eventos'],['Iliobaldo Vivas da Silva','Subsecretário dos Centros Olímpicos e Paralímpicos'],['Leila Barreto Ornelas','Chefe da Assessoria Jurídico-Legislativa'],['Pedro Marcio Azevedo dos Santos de Lima Paiva','Chefe da Unidade de Controle Interno'],['Isabella Carneiro de Melo Picarelli','Chefe da Assessoria de Comunicação'],['Carlos Mohamed','Chefe da Assessoria de Obras e Infraestrutura'],['Miriam França','Ouvidora']].map(([name,role])=>({name,role}));
-  const normalize=s=>s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim();
-  root.SEL={general,inclusive,school,support,programs,centers,venues,fields,team,mapURL:'https://www.google.com/maps/d/embed?mid=1lMvcLrOFOl1jZ8hZt7y_c1SAw3QDnTc&ehbc=2E312F',normalize};
+  const school = [
+    ["Ginástica acrobática", 18],
+    ["Nado artístico", 12],
+    ["Natação", 24],
+    ["Deep water", 16],
+    ["Musculação", 30],
+    ["Saltos ornamentais", 10],
+    ["Alongamento", 22],
+    ["Karatê", 20],
+  ].map(([name, vacancies]) => ({ name, vacancies }));
+  const support = [
+    { name: "Nacional", people: 316, investment: 478602.4, color: "#0780df" },
+    {
+      name: "Internacional",
+      people: 173,
+      investment: 1539450.49,
+      color: "#00a66d",
+    },
+    {
+      name: "Terrestre",
+      people: 1284,
+      investment: 890139.53,
+      color: "#ffb627",
+    },
+  ];
+  const programs = [
+    {
+      id: "escola",
+      name: "Escola de Esportes",
+      tag: "Formação e qualidade de vida",
+      icon: "book",
+      logo: "escola.png",
+      tone: "blue",
+      description:
+        "Atividades para crianças, adolescentes, adultos, idosos e pessoas com deficiência.",
+      highlight: "2 mil+ alunos",
+      action: "Conhecer a escola",
+      url: "https://esporte.df.gov.br/escola-de-esportes/",
+    },
+    {
+      id: "compete",
+      name: "Compete Brasília",
+      tag: "Alto rendimento",
+      icon: "trophy",
+      logo: "compete.png",
+      tone: "green",
+      description:
+        "Apoio a atletas e paratletas em competições nacionais e internacionais.",
+      highlight: "1.773 beneficiados",
+      action: "Ver resultados",
+      url: "https://esporte.df.gov.br/compete/",
+    },
+    {
+      id: "distrito",
+      name: "Distrito Gamer",
+      tag: "Esporte eletrônico",
+      icon: "grid",
+      tone: "purple",
+      description:
+        "Iniciativa demonstrativa para aproximar juventude, tecnologia e competição saudável.",
+      highlight: "Novas experiências",
+      action: "Ver programa",
+      url: "https://esporte.df.gov.br/",
+    },
+    {
+      id: "podio",
+      name: "DF no Pódio",
+      tag: "Talentos do Distrito Federal",
+      icon: "medal",
+      tone: "yellow",
+      description:
+        "Vitrine de apoio e reconhecimento a talentos esportivos do Distrito Federal.",
+      highlight: "Talento em destaque",
+      action: "Ver programa",
+      url: "https://esporte.df.gov.br/",
+    },
+    {
+      id: "gol",
+      name: "Gol de Placa",
+      tag: "Materiais esportivos",
+      icon: "ball",
+      tone: "blue",
+      description:
+        "Apoio a projetos e comunidades por meio da oferta de materiais esportivos.",
+      highlight: "Esporte perto de você",
+      action: "Ver programa",
+      url: "https://esporte.df.gov.br/esporte-para-todos/",
+    },
+    {
+      id: "mulheres",
+      name: "Mulheres no Topo",
+      tag: "Protagonismo feminino",
+      icon: "people",
+      tone: "coral",
+      description:
+        "Incentivo à presença e ao protagonismo de mulheres no esporte do DF.",
+      highlight: "Mais representatividade",
+      action: "Ver programa",
+      url: "https://esporte.df.gov.br/",
+    },
+    {
+      id: "viva",
+      name: "Projeto Viva",
+      tag: "Saúde e convivência",
+      icon: "heart",
+      tone: "green",
+      description:
+        "Práticas esportivas e de lazer para uma rotina mais ativa e integrada.",
+      highlight: "Qualidade de vida",
+      action: "Ver programa",
+      url: "https://esporte.df.gov.br/",
+    },
+    {
+      id: "cops",
+      name: "Centros Olímpicos e Paralímpicos",
+      tag: "Esporte e inclusão",
+      icon: "people",
+      logo: "cops.png",
+      tone: "blue",
+      description:
+        "Rede de unidades para esporte, lazer, formação e inclusão em todas as idades.",
+      highlight: "12 unidades",
+      action: "Explorar espaços",
+      url: "https://esporte.df.gov.br/cops/",
+    },
+    {
+      id: "cidades",
+      name: "Esporte nas Cidades",
+      tag: "Ações itinerantes",
+      icon: "pin",
+      tone: "yellow",
+      description:
+        "Atividades e experiências esportivas levadas às regiões administrativas.",
+      highlight: "Presença no DF",
+      action: "Ver programa",
+      url: "https://esporte.df.gov.br/",
+    },
+    {
+      id: "bolsa",
+      name: "Bolsa Atleta",
+      tag: "Incentivo ao esporte",
+      icon: "medal",
+      tone: "green",
+      description:
+        "Apoio para que atletas sigam treinando, competindo e representando o DF.",
+      highlight: "Apoio ao rendimento",
+      action: "Ver programa",
+      url: "https://esporte.df.gov.br/bolsa-atleta/",
+    },
+    {
+      id: "sesi",
+      name: "Parceria SESI",
+      tag: "Cooperação institucional",
+      icon: "users",
+      tone: "purple",
+      description:
+        "Ações demonstrativas em parceria para ampliar o acesso ao esporte e ao lazer.",
+      highlight: "Rede de oportunidades",
+      action: "Ver programa",
+      url: "https://esporte.df.gov.br/",
+    },
+    {
+      id: "lei",
+      name: "Lei de Incentivo ao Esporte",
+      tag: "Fomento a projetos",
+      icon: "file",
+      logo: "lei.png",
+      tone: "coral",
+      description:
+        "Incentivo fiscal para projetos esportivos e paraesportivos no Distrito Federal.",
+      highlight: "Projetos que transformam",
+      action: "Conhecer a lei",
+      url: "https://esporte.df.gov.br/lei-de-incentivo-ao-esporte/",
+    },
+  ];
+  const centers = [
+    "Brazlândia",
+    "Recanto das Emas",
+    "Ceilândia - Setor O",
+    "Santa Maria",
+    "Ceilândia - Parque da Vaquejada",
+    "Sobradinho",
+    "Estrutural",
+    "São Sebastião",
+    "Gama",
+    "Riacho Fundo",
+    "Planaltina",
+    "Samambaia",
+  ];
+  const venues = [
+    "Ginásio de Esportes de Samambaia",
+    "Parque Aquático Cláudio Coutinho",
+    "Parque da Cidade Dona Sarah Kubitschek",
+    "Pavilhão de Exposições do Parque da Cidade",
+    "Estádio Bezerrão",
+    "Estádio Joaquim Domingos Roriz",
+    "Estádio Augustinho Lima",
+    "Estádio Abadião",
+  ];
+  const fields = [
+    "Planaltina",
+    "Gama - QD 8, Setor Sul",
+    "COP Samambaia - QN 319",
+    "COP Vaquejada - QNP 21",
+    "Ceilândia - EQNN 01/03",
+    "Taguatinga - QNJ 03/05",
+    "Samambaia - 311",
+    "Sobradinho - COP",
+  ];
+  const team = [
+    ["Victor Renato Junqueira Lacerda", "Secretário de Esporte e Lazer"],
+    ["Mateus Celestino Bahia", "Secretário Executivo"],
+    ["Maria Paula Lopes Andrade", "Chefe de Gabinete"],
+    [
+      "Nivaldo Vieira Felix",
+      "Subsecretário de Esporte, Lazer e Espaços Esportivos",
+    ],
+    ["Edimar Souza Lima", "Subsecretário de Administração Geral"],
+    ["Carlos Henrique Ferreira Pontes", "Subsecretário de Projetos e Eventos"],
+    [
+      "Iliobaldo Vivas da Silva",
+      "Subsecretário dos Centros Olímpicos e Paralímpicos",
+    ],
+    ["Leila Barreto Ornelas", "Chefe da Assessoria Jurídico-Legislativa"],
+    [
+      "Pedro Marcio Azevedo dos Santos de Lima Paiva",
+      "Chefe da Unidade de Controle Interno",
+    ],
+    [
+      "Isabella Carneiro de Melo Picarelli",
+      "Chefe da Assessoria de Comunicação",
+    ],
+    ["Carlos Mohamed", "Chefe da Assessoria de Obras e Infraestrutura"],
+    ["Miriam França", "Ouvidora"],
+  ].map(([name, role]) => ({ name, role }));
+  const normalize = (s) =>
+    s
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .toLowerCase()
+      .trim();
+  root.SEL = {
+    general,
+    inclusive,
+    school,
+    support,
+    programs,
+    centers,
+    venues,
+    fields,
+    team,
+    mapURL:
+      "https://www.google.com/maps/d/embed?mid=1lMvcLrOFOl1jZ8hZt7y_c1SAw3QDnTc&ehbc=2E312F",
+    normalize,
+  };
 })(window);
