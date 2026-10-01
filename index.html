@@ -12,7 +12,7 @@
       content="Protótipo demonstrativo do Painel de Esporte e Lazer do Distrito Federal."
     />
     <title>SEL DF - Painel de Esporte e Lazer</title>
-    <link rel="stylesheet" href="styles.css?v=10" />
+    <link rel="stylesheet" href="styles.css?v=11" />
   </head>
   <body>
     <svg class="sprite" aria-hidden="true">
@@ -276,30 +276,96 @@
           <div id="dataContent"></div>
         </section>
         <section class="view" id="modalidades" data-view="modalidades">
-          <div class="page-title">
-            <p>Centros Olímpicos e Paralímpicos</p>
-            <h1>Encontre sua modalidade</h1>
-            <span
-              >Busque e filtre atividades gerais ou conheça as práticas
-              inclusivas.</span
-            >
+          <div class="cops-hero">
+            <div class="cops-hero-copy">
+              <img
+                src="assets/cops.png"
+                alt="Centros Olímpicos e Paralímpicos"
+              />
+              <span class="eyebrow">ESPORTE, LAZER E INCLUSÃO</span>
+              <h1>Conheça os Centros Olímpicos e Paralímpicos</h1>
+              <p>
+                Uma rede pública para praticar esportes, cuidar da saúde,
+                conviver e descobrir novos talentos em diferentes regiões do
+                Distrito Federal.
+              </p>
+              <button data-go="espacos">
+                Encontrar uma unidade <svg><use href="#i-pin" /></svg>
+              </button>
+            </div>
           </div>
-          <label class="search"
-            ><svg><use href="#i-search" /></svg
-            ><input
-              id="modalitySearch"
-              type="search"
-              placeholder="Buscar modalidade"
-          /></label>
-          <div class="filter-row" id="modalityFilters"></div>
-          <div class="modality-grid" id="modalityList"></div>
-          <div class="inclusive-block reveal">
-            <span class="eyebrow">ESPORTE PARA TODOS</span>
-            <h2>Modalidades inclusivas</h2>
-            <p>
-              Atividades exclusivas e adaptadas para alunos com deficiência.
-            </p>
-            <div class="modality-grid" id="inclusiveList"></div>
+          <div class="cops-impact reveal">
+            <article>
+              <strong data-count="12">0</strong><span>unidades no DF</span>
+            </article>
+            <article>
+              <strong data-count="26">0</strong><span>modalidades gerais</span>
+            </article>
+            <article>
+              <strong data-count="12">0</strong
+              ><span>atividades inclusivas</span>
+            </article>
+            <article>
+              <strong>6+</strong><span>faixas etárias atendidas</span>
+            </article>
+          </div>
+          <div class="cops-about reveal">
+            <div>
+              <span class="eyebrow">UM PROGRAMA PARA TODOS</span>
+              <h2>Movimento que aproxima pessoas</h2>
+              <p>
+                Os COPs oferecem atividades orientadas em ambientes preparados
+                para crianças, jovens, adultos, idosos e pessoas com
+                deficiência. Os indicadores são demonstrativos para esta
+                apresentação.
+              </p>
+            </div>
+            <button data-go="espacos">
+              Ver os 12 centros <svg><use href="#i-arrow" /></svg>
+            </button>
+          </div>
+          <div class="cops-modalities reveal">
+            <div class="section-head">
+              <div>
+                <small>ATIVIDADES OFERECIDAS</small>
+                <h2>Conheça as modalidades</h2>
+              </div>
+            </div>
+            <div class="modality-accordion">
+              <button
+                class="modality-toggle active"
+                data-modality-panel="general"
+                aria-expanded="true"
+                aria-controls="generalPanel"
+              >
+                <span
+                  ><svg><use href="#i-ball" /></svg
+                  ><b>Modalidades e atividades gerais</b
+                  ><small>26 opções</small></span
+                ><svg class="toggle-arrow"><use href="#i-arrow" /></svg>
+              </button>
+              <div class="modality-panel open" id="generalPanel">
+                <div class="modality-catalog" id="modalityList"></div>
+              </div>
+              <button
+                class="modality-toggle inclusive-toggle"
+                data-modality-panel="inclusive"
+                aria-expanded="false"
+                aria-controls="inclusivePanel"
+              >
+                <span
+                  ><svg><use href="#i-heart" /></svg
+                  ><b>Modalidades inclusivas</b
+                  ><small>12 atividades</small></span
+                ><svg class="toggle-arrow"><use href="#i-arrow" /></svg>
+              </button>
+              <div class="modality-panel" id="inclusivePanel">
+                <div
+                  class="modality-catalog inclusive-catalog"
+                  id="inclusiveList"
+                ></div>
+              </div>
+            </div>
           </div>
         </section>
         <section class="view" id="escola" data-view="escola">
@@ -438,6 +504,6 @@
       <div id="dialogBody"></div>
     </dialog>
     <script src="data.js?v=8"></script>
-    <script src="app.js?v=8"></script>
+    <script src="app.js?v=11"></script>
   </body>
 </html>

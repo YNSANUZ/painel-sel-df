@@ -109,7 +109,10 @@ button {
   background: #fff;
   padding: 25px;
   transform: translateX(110%);
-  transition: 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+  visibility: hidden;
+  transition:
+    transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
+    visibility 0s 0.3s;
   box-shadow: -14px 0 40px #071b3b24;
   display: flex;
   flex-direction: column;
@@ -117,6 +120,8 @@ button {
 }
 .drawer.open {
   transform: translateX(0);
+  visibility: visible;
+  transition-delay: 0s;
 }
 .drawer-head {
   display: flex;
@@ -898,6 +903,212 @@ main {
   stroke: currentColor;
   stroke-width: 1.7;
 }
+.cops-hero {
+  min-height: 440px;
+  margin: 0 -30px;
+  padding: 54px 8%;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  background:
+    linear-gradient(90deg, rgba(3, 33, 68, 0.97), rgba(5, 92, 158, 0.75)),
+    url("assets/running.jpg") center 42% / cover;
+}
+.cops-hero-copy {
+  max-width: 660px;
+}
+.cops-hero-copy > img {
+  width: 155px;
+  max-height: 65px;
+  object-fit: contain;
+  object-position: left center;
+  padding: 8px;
+  border-radius: 14px;
+  background: #fff;
+  margin-bottom: 22px;
+}
+.cops-hero-copy h1 {
+  max-width: 620px;
+  margin: 11px 0 16px;
+  font-size: clamp(38px, 5vw, 58px);
+  line-height: 1;
+  letter-spacing: -2px;
+}
+.cops-hero-copy p {
+  max-width: 590px;
+  color: #deeffb;
+  font-size: 17px;
+  line-height: 1.55;
+}
+.cops-hero-copy button,
+.cops-about button {
+  border: 0;
+  border-radius: 15px;
+  padding: 13px 17px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #fff;
+  color: var(--blue2);
+  font-weight: 850;
+}
+.cops-hero-copy button svg,
+.cops-about button svg {
+  width: 21px;
+  height: 21px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+}
+.cops-impact {
+  position: relative;
+  z-index: 2;
+  margin: -38px auto 24px;
+  width: min(94%, 900px);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-radius: 23px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: var(--shadow);
+}
+.cops-impact article {
+  min-height: 125px;
+  padding: 22px 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  border-right: 1px solid var(--line);
+}
+.cops-impact article:last-child {
+  border-right: 0;
+}
+.cops-impact strong {
+  color: var(--blue);
+  font-size: 36px;
+  line-height: 1;
+}
+.cops-impact span {
+  margin-top: 7px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 750;
+}
+.cops-about {
+  margin: 26px 0;
+  padding: 28px;
+  border-radius: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+  background: #eaf5ff;
+}
+.cops-about h2 {
+  margin: 7px 0;
+  font-size: 29px;
+}
+.cops-about p {
+  max-width: 700px;
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.55;
+}
+.cops-modalities {
+  margin-top: 28px;
+}
+.modality-accordion {
+  display: grid;
+  gap: 12px;
+}
+.modality-toggle {
+  width: 100%;
+  min-height: 82px;
+  border: 0;
+  border-radius: 20px;
+  padding: 15px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-align: left;
+  color: #fff;
+  background: linear-gradient(110deg, #0875c9, #075aa7);
+}
+.inclusive-toggle {
+  background: linear-gradient(110deg, #00a66d, #087e68);
+}
+.modality-toggle > span {
+  display: grid;
+  grid-template-columns: 46px 1fr;
+  align-items: center;
+  column-gap: 13px;
+}
+.modality-toggle > span > svg {
+  grid-row: 1 / 3;
+  width: 46px;
+  height: 46px;
+  padding: 10px;
+  border-radius: 14px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  background: #ffffff1f;
+}
+.modality-toggle b {
+  font-size: 18px;
+}
+.modality-toggle small {
+  color: #d9edfc;
+}
+.modality-toggle .toggle-arrow {
+  width: 25px;
+  height: 25px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  transition: transform 0.28s ease;
+}
+.modality-toggle.active .toggle-arrow {
+  transform: rotate(90deg);
+}
+.modality-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition:
+    grid-template-rows 0.38s ease,
+    opacity 0.3s ease;
+}
+.modality-panel.open {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+.modality-panel > div {
+  overflow: hidden;
+}
+.modality-catalog {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0 24px;
+  padding: 3px 22px 18px;
+  border: 1px solid var(--line);
+  border-radius: 0 0 20px 20px;
+  background: #fff;
+}
+.modality-catalog > span {
+  padding: 13px 3px;
+  border-bottom: 1px solid var(--line);
+  color: var(--navy);
+  font-size: 14px;
+  font-weight: 720;
+}
+.inclusive-catalog > span:before {
+  content: "✓";
+  margin-right: 8px;
+  color: var(--green);
+  font-weight: 900;
+}
 .modality-item strong {
   font-size: 14px;
 }
@@ -1666,6 +1877,66 @@ dialog::backdrop {
   }
   .modality-grid {
     grid-template-columns: 1fr 1fr;
+  }
+  .cops-hero {
+    min-height: 510px;
+    margin: 0 -14px;
+    padding: 45px 24px 78px;
+    align-items: end;
+    background-position: 63% center;
+  }
+  .cops-hero-copy > img {
+    width: 130px;
+  }
+  .cops-hero-copy h1 {
+    font-size: 37px;
+  }
+  .cops-hero-copy p {
+    font-size: 14px;
+  }
+  .cops-impact {
+    width: 100%;
+    grid-template-columns: repeat(2, 1fr);
+    margin-top: -48px;
+  }
+  .cops-impact article {
+    min-height: 108px;
+    padding: 17px 10px;
+    border-bottom: 1px solid var(--line);
+  }
+  .cops-impact strong {
+    font-size: 30px;
+  }
+  .cops-about {
+    padding: 22px;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .cops-about h2 {
+    font-size: 25px;
+  }
+  .modality-toggle {
+    min-height: 76px;
+    padding: 13px;
+  }
+  .modality-toggle > span {
+    grid-template-columns: 40px 1fr;
+  }
+  .modality-toggle > span > svg {
+    width: 40px;
+    height: 40px;
+    padding: 9px;
+  }
+  .modality-toggle b {
+    font-size: 14px;
+  }
+  .modality-catalog {
+    grid-template-columns: 1fr 1fr;
+    gap: 0 12px;
+    padding: 3px 14px 16px;
+  }
+  .modality-catalog > span {
+    font-size: 12px;
   }
   .modality-item {
     padding: 12px;

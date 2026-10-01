@@ -58,45 +58,15 @@ function renderData() {
     `<div class="data-hero reveal"><div><span>COMPETE BRASÍLIA</span><h2>Resultados que atravessam fronteiras</h2><p>Apoio demonstrativo a atletas e paratletas em competições.</p></div><div class="donut" style="--target:72"><strong data-count="1773">0</strong><small>beneficiados</small></div></div><div class="data-kpis reveal"><article><small>Investimento</small><strong>R$ <b data-count="2.91" data-decimals="2">0</b> mi</strong><span>Total demonstrativo</span></article><article><small>Medalhas</small><strong data-count="350">0</strong><span>Referência visual</span></article><article><small>Apoios</small><strong data-count="3">0</strong><span>Modalidades de transporte</span></article></div><article class="chart-card reveal"><div class="section-head"><div><small>DISTRIBUIÇÃO</small><h2>Investimento por apoio</h2></div></div><div class="bars">${SEL.support.map((x) => `<div><div class="bar-head"><span>${x.name}</span><strong>${money(x.investment)}</strong></div><div class="track"><i style="--w:${(x.investment / max) * 100}%;background:${x.color}"></i></div><small><b data-count="${x.people}">0</b> atendimentos</small></div>`).join("")}</div><p class="source-note">Valores demonstrativos, sem integração em tempo real.</p></article><div class="chart-pair"><article class="chart-card reveal"><div class="section-head"><div><small>DESEMPENHO</small><h2>Medalhas obtidas</h2></div></div><div class="vertical-chart">${medals.map(([name, value, color]) => `<div><strong data-count="${value}">0</strong><i style="--h:${value / 2}%;background:${color}"></i><span>${name}</span></div>`).join("")}</div></article><article class="chart-card reveal"><div class="section-head"><div><small>ATENDIMENTOS</small><h2>Perfil do apoio</h2></div></div><div class="bars compact">${profiles.map(([name, value, color]) => `<div><div class="bar-head"><span>${name}</span><strong data-count="${value}">0</strong></div><div class="track"><i style="--w:${value / 1.5}%;background:${color}"></i></div></div>`).join("")}</div></article></div><div class="split-cards reveal"><article><span data-count="12">0</span><h3>COPs</h3><p>Unidades em diferentes regiões do DF.</p></article><article><span><b data-count="2000">0</b>+</span><h3>Escola de Esportes</h3><p>Alunos no cenário demonstrativo.</p></article></div>`;
   observeReveals();
 }
-let category = "todos";
 function renderModalities() {
-  const q = SEL.normalize($("#modalitySearch")?.value || "");
-  const list = SEL.general.filter(
-    (x) =>
-      (category === "todos" || x.category === category) &&
-      SEL.normalize(x.name).includes(q),
-  );
-  $("#modalityList").innerHTML = list.length
-    ? list
-        .map(
-          (x) =>
-            `<article class="modality-item"><span>${icon("ball")}</span><strong>${x.name}</strong><small>${x.category}</small></article>`,
-        )
-        .join("")
-    : '<p class="empty">Nenhuma modalidade encontrada.</p>';
-}
-function setupModalities() {
-  const labels = {
-    todos: "Todas",
-    coletivas: "Coletivas",
-    aquaticas: "Aquáticas",
-    lutas: "Lutas",
-    ginasticas: "Ginásticas",
-    "bem-estar": "Bem-estar",
-    individuais: "Individuais",
-  };
-  $("#modalityFilters").innerHTML = Object.entries(labels)
-    .map(
-      ([id, label]) =>
-        `<button class="${id === "todos" ? "active" : ""}" data-category="${id}">${label}</button>`,
-    )
+  $("#modalityList").innerHTML = SEL.general
+    .map((x) => `<span>${x.name}</span>`)
     .join("");
   $("#inclusiveList").innerHTML = SEL.inclusive
-    .map(
-      (x) =>
-        `<article class="modality-item inclusive">${icon("heart")}<strong>${x}</strong></article>`,
-    )
+    .map((x) => `<span>${x}</span>`)
     .join("");
+}
+function setupModalities() {
   renderModalities();
 }
 function renderSchool() {
@@ -261,11 +231,19 @@ document.addEventListener("click", (e) => {
   if (p) showProgram(p.dataset.program);
   const g = e.target.closest("[data-go]");
   if (g) location.hash = g.dataset.go;
-  const c = e.target.closest("[data-category]");
-  if (c) {
-    category = c.dataset.category;
-    $$("[data-category]").forEach((b) => b.classList.toggle("active", b === c));
-    renderModalities();
+  const toggle = e.target.closest("[data-modality-panel]");
+  if (toggle) {
+    const name = toggle.dataset.modalityPanel;
+    $$("[data-modality-panel]").forEach((button) => {
+      const active =
+        button === toggle && button.getAttribute("aria-expanded") !== "true";
+      button.classList.toggle("active", active);
+      button.setAttribute("aria-expanded", String(active));
+      $("#" + button.getAttribute("aria-controls")).classList.toggle(
+        "open",
+        active,
+      );
+    });
   }
   const s = e.target.closest("[data-space]");
   if (s) {
@@ -277,7 +255,6 @@ document.addEventListener("click", (e) => {
 $("#programSearch").addEventListener("input", (e) =>
   renderPrograms(e.target.value),
 );
-$("#modalitySearch").addEventListener("input", renderModalities);
 $("#menuBtn").addEventListener("click", () => {
   $("#drawer").classList.add("open");
   $("#scrim").classList.add("open");
