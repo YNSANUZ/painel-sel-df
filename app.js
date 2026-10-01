@@ -24,7 +24,7 @@ function showProgram(id) {
   $("#programDialog").showModal();
 }
 function programCard(p) {
-  return `<article class="program-card tone-${p.tone} reveal"><div class="program-icon">${p.logo ? `<img src="assets/${p.logo}" alt="">` : icon(p.icon)}</div><span>${p.tag}</span><h3>${p.name}</h3><p>${p.description}</p><strong>${p.highlight}</strong><button data-program="${p.id}">${p.action}<svg><use href="#i-arrow"/></svg></button></article>`;
+  return `<article class="program-card tone-${p.tone}" data-program="${p.id}" role="button" tabindex="0" aria-label="${p.action}: ${p.name}"><div class="program-icon">${p.logo ? `<img src="assets/${p.logo}" alt="">` : icon(p.icon)}</div><span>${p.tag}</span><h3>${p.name}</h3><p>${p.description}</p><strong>${p.highlight}</strong><button type="button" tabindex="-1">${p.action}<svg><use href="#i-arrow"/></svg></button></article>`;
 }
 function renderFeatured() {
   $("#featuredPrograms").innerHTML = SEL.programs
@@ -190,7 +190,10 @@ function observeReveals() {
         }),
       { threshold: 0.12 },
     );
-  $$(".reveal:not(.shown)").forEach((x) => revealObserver.observe(x));
+  $$(".reveal:not(.shown)").forEach((x) => {
+    revealObserver.unobserve(x);
+    revealObserver.observe(x);
+  });
 }
 function closeMenu() {
   $("#drawer").classList.remove("open");
@@ -215,8 +218,13 @@ function route() {
       : "smooth",
   });
   setTimeout(() => {
+    const activeView = $(`[data-view="${safe}"]`);
+    $$(".reveal", activeView).forEach((item) => {
+      if (item.getBoundingClientRect().top < innerHeight * 1.15)
+        item.classList.add("shown");
+    });
     observeReveals();
-    animateCounts($(`[data-view="${safe}"]`));
+    animateCounts(activeView);
   }, 60);
 }
 renderFeatured();
@@ -269,6 +277,11 @@ $("#spaceClose").addEventListener("click", () =>
   $("#spaceSheet").classList.remove("open"),
 );
 addEventListener("keydown", (e) => {
+  const card = e.target.closest?.(".program-card[data-program]");
+  if (card && (e.key === "Enter" || e.key === " ")) {
+    e.preventDefault();
+    showProgram(card.dataset.program);
+  }
   if (e.key === "Escape") {
     closeMenu();
     $("#spaceSheet").classList.remove("open");
