@@ -12,7 +12,7 @@
       content="Protótipo demonstrativo do Painel de Esporte e Lazer do Distrito Federal."
     />
     <title>SEL DF - Painel de Esporte e Lazer</title>
-    <link rel="stylesheet" href="styles.css?v=5" />
+    <link rel="stylesheet" href="styles.css?v=8" />
   </head>
   <body>
     <svg class="sprite" aria-hidden="true">
@@ -188,6 +188,81 @@
               ></iframe>
             </div>
           </div>
+          <section class="home-school reveal" aria-labelledby="homeSchoolTitle">
+            <p class="home-school-intro">
+              O Programa Escola de Esportes incentiva a prática esportiva entre
+              crianças e adolescentes de 6 a 17 anos, integra adultos, idosos e
+              pessoas com deficiência e estimula hábitos de vida saudável.
+            </p>
+            <h2 id="homeSchoolTitle">
+              A Escola de Esportes está<br />beneficiando mais de
+            </h2>
+            <strong class="school-number"><span data-count="2">0</span></strong>
+            <p class="school-period">
+              alunos no 2º<br />semestre de <b>2025</b>
+            </p>
+            <small>Entre as modalidades estão disponíveis</small>
+            <div class="home-school-list" id="homeSchoolList"></div>
+            <a
+              class="school-signup"
+              href="https://sistemas.df.gov.br/ComplexoAquaticoClaudioCoutinho"
+              target="_blank"
+              rel="noreferrer"
+              >Inscrição <svg><use href="#i-arrow" /></svg
+            ></a>
+          </section>
+          <section
+            class="home-compete reveal"
+            aria-labelledby="homeCompeteTitle"
+          >
+            <div class="compete-brand">
+              <img src="assets/compete.png" alt="Marca Compete Brasília" />
+              <span>Alto rendimento</span>
+            </div>
+            <h2 id="homeCompeteTitle">Compete Brasília</h2>
+            <p class="compete-intro">
+              Incentivo à participação de atletas e paratletas em campeonatos
+              nacionais e internacionais, com transporte aéreo e terrestre.
+            </p>
+            <h3>1º semestre <strong>2024</strong></h3>
+            <div class="compete-table-wrap">
+              <div class="compete-table-title">Atendimentos</div>
+              <div class="compete-table" id="homeCompeteTable"></div>
+            </div>
+            <div class="compete-results">
+              <div class="medal-donut" style="--target: 100">
+                <div>
+                  <strong data-count="350">0</strong
+                  ><span>medalhas<br />obtidas</span>
+                </div>
+              </div>
+              <div class="medal-legend">
+                <span><i class="gold"></i><b data-count="50">0</b> ouro</span>
+                <span
+                  ><i class="silver"></i><b data-count="200">0</b> prata</span
+                >
+                <span
+                  ><i class="bronze"></i><b data-count="100">0</b> bronze</span
+                >
+              </div>
+              <div class="compete-total">
+                <strong data-count="1773">0</strong><span>beneficiados</span>
+              </div>
+              <div class="compete-money">
+                <small>+ de</small
+                ><strong
+                  >R$ <b data-count="2908192.42" data-decimals="2">0</b></strong
+                ><span>investidos</span>
+              </div>
+            </div>
+            <a
+              class="compete-more"
+              href="https://esporte.df.gov.br/compete/"
+              target="_blank"
+              rel="noreferrer"
+              >Mais detalhes <svg><use href="#i-arrow" /></svg
+            ></a>
+          </section>
         </section>
         <section class="view" id="dados" data-view="dados">
           <div class="page-title">
@@ -362,7 +437,7 @@
       </button>
       <div id="dialogBody"></div>
     </dialog>
-    <script src="data.js?v=5"></script>
-    <script src="app.js?v=6"></script>
+    <script src="data.js?v=8"></script>
+    <script src="app.js?v=8"></script>
   </body>
 </html>

@@ -473,6 +473,318 @@ main {
   height: calc(100% + 108px);
   border: 0;
 }
+.home-school,
+.home-compete {
+  margin: 38px 0 8px;
+  border-radius: 28px;
+  padding: 38px 28px 32px;
+  text-align: center;
+  color: #fff;
+  overflow: hidden;
+  position: relative;
+}
+.home-school {
+  background:
+    radial-gradient(circle at 15% 12%, #53cfe1 0, transparent 42%),
+    linear-gradient(145deg, #1597d0, #0560b6 78%);
+}
+.home-school-intro,
+.compete-intro {
+  max-width: 680px;
+  margin: 0 auto 20px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #ecfaff;
+}
+.home-school h2 {
+  margin: 0;
+  font-size: clamp(27px, 4vw, 43px);
+  line-height: 1.15;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+}
+.school-number {
+  display: inline-block;
+  margin: 17px 0 7px;
+  padding: 2px 18px 5px;
+  border-radius: 10px;
+  color: #0758a8;
+  background: #ffe500;
+  font-size: clamp(38px, 7vw, 69px);
+  line-height: 0.95;
+  transform: rotate(-5deg);
+  text-transform: uppercase;
+  box-shadow: 0 8px 0 #004b9330;
+}
+.school-number:after {
+  content: " mil";
+}
+.school-period {
+  margin: 9px 0 5px;
+  font-size: 23px;
+  line-height: 1.14;
+  text-transform: uppercase;
+}
+.school-period b {
+  display: inline-block;
+  color: #ffe500;
+  font-size: 38px;
+}
+.home-school > small {
+  display: block;
+  margin: 8px 0 22px;
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+}
+.home-school-list {
+  max-width: 650px;
+  margin: 0 auto 25px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px 12px;
+  align-items: center;
+}
+.school-sticker {
+  justify-self: center;
+  transform: rotate(var(--r, -2deg));
+}
+.school-sticker:nth-child(even) {
+  --r: 3deg;
+}
+.school-sticker:nth-child(3n) {
+  --r: -4deg;
+}
+.school-sticker strong {
+  display: block;
+  padding: 5px 8px;
+  color: #123c61;
+  background: #fff;
+  font-size: 11px;
+  line-height: 1.05;
+  text-transform: uppercase;
+  box-shadow: 0 5px 12px #00437a32;
+}
+.school-sticker span {
+  display: inline-block;
+  padding: 2px 6px;
+  color: #0758a8;
+  background: #ffe500;
+  font-size: 9px;
+  font-weight: 850;
+}
+.school-signup,
+.compete-more {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 12px 25px;
+  border-radius: 999px;
+  color: #fff;
+  background: #ff9d18;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 13px;
+  font-weight: 850;
+  box-shadow: 0 7px 18px #00437a45;
+}
+.school-signup svg,
+.compete-more svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.2;
+}
+.home-compete {
+  background:
+    linear-gradient(135deg, transparent 72%, #ef5147 72% 84%, transparent 84%),
+    linear-gradient(45deg, transparent 70%, #36bdd0 70% 82%, transparent 82%),
+    linear-gradient(160deg, #0873bc, #064f9e);
+}
+.compete-brand {
+  width: min(100%, 570px);
+  margin: 0 auto 14px;
+  padding: 11px 20px;
+  border-radius: 18px;
+  background: #fff;
+  color: var(--blue);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.compete-brand img {
+  width: 145px;
+  max-height: 58px;
+  object-fit: contain;
+}
+.compete-brand span {
+  font-size: 12px;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+.home-compete > h2 {
+  font-size: 38px;
+  margin: 8px 0;
+}
+.home-compete > h3 {
+  font-size: 26px;
+  margin: 14px 0 8px;
+  text-transform: uppercase;
+}
+.home-compete > h3 strong {
+  color: #ffe500;
+  font-size: 42px;
+  margin-left: 8px;
+}
+.compete-table-wrap {
+  max-width: 820px;
+  margin: auto;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #368bd2;
+  border: 1px solid #00488d;
+  box-shadow: 0 14px 30px #00396e38;
+}
+.compete-table-title {
+  padding: 9px;
+  font-size: 19px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+.compete-row {
+  display: grid;
+  grid-template-columns: 1.25fr repeat(4, 0.65fr) 1.55fr;
+  align-items: center;
+  min-height: 48px;
+  padding: 6px 12px;
+  border-top: 1px solid #ffffff48;
+  gap: 5px;
+}
+.compete-row > * {
+  font-size: 12px;
+}
+.compete-row > strong {
+  justify-self: start;
+  padding: 5px 7px;
+  border-radius: 4px;
+  color: #0758a8;
+  background: #ffe500;
+  text-transform: uppercase;
+}
+.compete-row em {
+  font-size: 15px;
+  font-weight: 850;
+  font-style: normal;
+}
+.compete-head {
+  min-height: 30px;
+  border: 0;
+  color: #e6ff48;
+}
+.compete-head > span {
+  font-size: 9px;
+}
+.compete-results {
+  margin: 30px auto 24px;
+  display: grid;
+  grid-template-columns: 210px 1fr;
+  align-items: center;
+  gap: 14px 28px;
+  max-width: 720px;
+}
+.medal-donut {
+  grid-row: 1 / 3;
+  width: 190px;
+  height: 190px;
+  margin: auto;
+  border-radius: 50%;
+  background: conic-gradient(#ffac16 0 57%, #fff 57% 86%, #ffe500 86%);
+  display: grid;
+  place-items: center;
+  transform: scale(0.45) rotate(-60deg);
+  opacity: 0;
+}
+.reveal.shown .medal-donut {
+  transform: scale(1) rotate(0);
+  opacity: 1;
+  transition: 1.9s cubic-bezier(0.2, 0.75, 0.25, 1);
+}
+.medal-donut:before {
+  content: "";
+  grid-area: 1/1;
+  width: 105px;
+  height: 105px;
+  border-radius: 50%;
+  background: #0561ae;
+}
+.medal-donut > div {
+  grid-area: 1/1;
+  z-index: 1;
+  display: grid;
+}
+.medal-donut strong {
+  font-size: 28px;
+}
+.medal-donut span {
+  font-size: 10px;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+.medal-legend {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+.medal-legend span {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10px;
+}
+.medal-legend i {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+.gold {
+  background: #ffe500;
+}
+.silver {
+  background: #fff;
+}
+.bronze {
+  background: #ffac16;
+}
+.compete-total strong {
+  display: block;
+  font-size: clamp(55px, 9vw, 88px);
+  line-height: 0.9;
+  text-shadow: 0 6px 0 #034b8d;
+}
+.compete-total span {
+  display: inline-block;
+  color: #ffe500;
+  font-size: 25px;
+  font-weight: 900;
+  text-transform: uppercase;
+  transform: rotate(-6deg);
+}
+.compete-money {
+  grid-column: 1 / -1;
+}
+.compete-money small,
+.compete-money span {
+  color: #ffe500;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+.compete-money strong {
+  display: block;
+  font-size: clamp(30px, 6vw, 58px);
+  letter-spacing: -2px;
+}
 .page-title {
   padding: 42px 5px 24px;
   max-width: 690px;
@@ -1233,6 +1545,68 @@ dialog::backdrop {
   .home-map-crop iframe {
     top: -108px;
     height: calc(100% + 108px);
+  }
+  .home-school,
+  .home-compete {
+    margin-top: 28px;
+    padding: 28px 16px;
+  }
+  .home-school-intro,
+  .compete-intro {
+    font-size: 12px;
+  }
+  .home-school h2 {
+    font-size: 25px;
+  }
+  .school-period {
+    font-size: 18px;
+  }
+  .school-period b {
+    font-size: 32px;
+  }
+  .home-school-list {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px 7px;
+  }
+  .compete-brand {
+    padding: 9px 12px;
+  }
+  .compete-brand img {
+    width: 115px;
+  }
+  .home-compete > h2 {
+    font-size: 31px;
+  }
+  .home-compete > h3 {
+    font-size: 18px;
+  }
+  .home-compete > h3 strong {
+    display: block;
+    font-size: 37px;
+  }
+  .compete-row {
+    grid-template-columns: 1.25fr repeat(4, 0.58fr) 1.45fr;
+    padding: 5px 6px;
+    gap: 2px;
+  }
+  .compete-row > * {
+    font-size: 8px;
+  }
+  .compete-row em {
+    font-size: 9px;
+  }
+  .compete-row > strong {
+    padding: 4px 3px;
+    font-size: 7px;
+  }
+  .compete-results {
+    grid-template-columns: 1fr;
+  }
+  .medal-donut {
+    grid-row: auto;
+  }
+  .compete-money {
+    grid-column: auto;
   }
   .page-title {
     padding: 31px 4px 20px;

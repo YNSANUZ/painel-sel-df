@@ -106,6 +106,25 @@ function renderSchool() {
         `<article class="vacancy reveal">${icon("ball")}<h3>${x.name}</h3><div><strong>${x.vacancies}</strong><span>vagas</span></div></article>`,
     )
     .join("");
+  $("#homeSchoolList").innerHTML = SEL.school
+    .map(
+      (x) =>
+        `<div class="school-sticker"><strong>${x.name}</strong><span><b data-count="${x.vacancies}">0</b> vagas</span></div>`,
+    )
+    .join("");
+  const competeRows = [
+    ["Nacional", 72, 192, 52, 316, "478.602,40"],
+    ["Internacional", 22, 127, 24, 173, "1.539.450,49"],
+    ["Terrestre", 58, 949, 226, 1284, "890.139,53"],
+  ];
+  $("#homeCompeteTable").innerHTML =
+    `<div class="compete-row compete-head"><span></span><span>Paratleta</span><span>Atleta</span><span>Téc.</span><span>Total</span><span>Investimento</span></div>` +
+    competeRows
+      .map(
+        ([name, para, athlete, staff, total, investment]) =>
+          `<div class="compete-row"><strong>${name}</strong><span data-count="${para}">0</span><span data-count="${athlete}">0</span><span data-count="${staff}">0</span><b data-count="${total}">0</b><em>R$ ${investment}</em></div>`,
+      )
+      .join("");
   observeReveals();
 }
 let spaceType = "cops";
@@ -224,7 +243,7 @@ function route() {
         item.classList.add("shown");
     });
     observeReveals();
-    animateCounts(activeView);
+    $$(".reveal.shown", activeView).forEach((item) => animateCounts(item));
   }, 60);
 }
 renderFeatured();
